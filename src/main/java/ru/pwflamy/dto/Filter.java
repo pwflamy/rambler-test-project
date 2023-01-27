@@ -37,6 +37,10 @@ public class Filter {
         return new Filter(FilterType.COUNTRY, country);
     }
 
+    public static Filter priceGreater(String value) {
+        return new Filter(FilterType.PRICE_GREATER, value);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

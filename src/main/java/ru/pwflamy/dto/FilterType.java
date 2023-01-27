@@ -2,5 +2,6 @@ package ru.pwflamy.dto;
 
 public enum FilterType {
 
-    COUNTRY
+    COUNTRY,
+    PRICE_GREATER
 }

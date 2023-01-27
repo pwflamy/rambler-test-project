@@ -77,4 +77,12 @@ public class AuctionApplicationTest {
         Assertions.assertThat(result)
                 .containsExactlyInAnyOrder(BANNER_6);
     }
+
+    @Test
+    public void testPriceFilter() {
+        List<Banner> rawBanners = List.of(BANNER_1, BANNER_2, BANNER_3, BANNER_4, BANNER_5);
+        List<Banner> result = auctionService.findActualBanners(rawBanners, 2, List.of(Filter.country("RUSSIA"), Filter.priceGreater("25")));
+        Assertions.assertThat(result)
+                .containsExactlyInAnyOrder(BANNER_3);
+    }
 }
