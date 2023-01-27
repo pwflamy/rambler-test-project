@@ -10,6 +10,7 @@ public class Banner {
     private BigDecimal price;
     private String companyId;
     private Set<String> countries;
+    private boolean special;
 
     public Banner() {
     }
@@ -19,6 +20,11 @@ public class Banner {
         this.price = price;
         this.companyId = companyId;
         this.countries = countries;
+    }
+
+    public Banner(Long id, BigDecimal price, String companyId, Set<String> countries, boolean special) {
+        this(id, price, companyId, countries);
+        this.special = special;
     }
 
     public Long getId() {
@@ -57,12 +63,22 @@ public class Banner {
         return this;
     }
 
+    public boolean getSpecial() {
+        return special;
+    }
+
+    public Banner setSpecial(boolean special) {
+        this.special = special;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Banner banner = (Banner) o;
-        return Objects.equals(id, banner.id) &&
+        return special == banner.special &&
+                Objects.equals(id, banner.id) &&
                 Objects.equals(price, banner.price) &&
                 Objects.equals(companyId, banner.companyId) &&
                 Objects.equals(countries, banner.countries);
@@ -70,7 +86,7 @@ public class Banner {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, price, companyId, countries);
+        return Objects.hash(id, price, companyId, countries, special);
     }
 
     @Override
@@ -80,6 +96,7 @@ public class Banner {
                 ", price=" + price +
                 ", companyId='" + companyId + '\'' +
                 ", countries=" + countries +
+                ", special=" + special +
                 '}';
     }
 }

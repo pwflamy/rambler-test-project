@@ -11,7 +11,7 @@ public class BannersSelectorService {
     public List<Banner> selectBanners(List<Banner> banners, int amount) {
         // выполняем shuffle, чтобы баннеры с одинаковой ценой равновероятно встречались в выводе
         Collections.shuffle(banners);
-        banners.sort(Comparator.comparing(Banner::getPrice, Comparator.reverseOrder()));
+        banners.sort(getComparator());
         Set<String> companyIds = new HashSet<>();
         List<Banner> result = new ArrayList<>();
         for (Banner banner : banners) {
@@ -24,5 +24,10 @@ public class BannersSelectorService {
             }
         }
         return result;
+    }
+
+    private static Comparator<Banner> getComparator() {
+        return Comparator.comparing(Banner::getPrice, Comparator.reverseOrder())
+                .thenComparing(Banner::getSpecial, Comparator.reverseOrder());
     }
 }

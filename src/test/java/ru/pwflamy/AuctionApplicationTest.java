@@ -32,6 +32,7 @@ public class AuctionApplicationTest {
     private static final Banner BANNER_4 = new Banner(4L, new BigDecimal("30"), "comp2", Set.of("RUSSIA", "FRANCE"));
     private static final Banner BANNER_5 = new Banner(5L, new BigDecimal("10"), "comp1", Set.of("FRANCE"));
     private static final Banner BANNER_6 = new Banner(6L, new BigDecimal("30"), "comp3", Set.of("ITALY"));
+    private static final Banner BANNER_7 = new Banner(7L, new BigDecimal("20"), "comp1", Set.of("RUSSIA"), true);
 
     @Autowired
     private AuctionService auctionService;
@@ -76,5 +77,13 @@ public class AuctionApplicationTest {
         List<Banner> result = auctionService.findActualBanners(rawBanners, 2, List.of(Filter.country("ITALY")));
         Assertions.assertThat(result)
                 .containsExactlyInAnyOrder(BANNER_6);
+    }
+
+    @Test
+    public void testSpecialBanner() {
+        List<Banner> rawBanners = List.of(BANNER_1, BANNER_2, BANNER_3, BANNER_6, BANNER_7);
+        List<Banner> result = auctionService.findActualBanners(rawBanners, 3, List.of(Filter.country("RUSSIA")));
+        Assertions.assertThat(result)
+                .containsExactlyInAnyOrder(BANNER_3, BANNER_7);
     }
 }

@@ -21,7 +21,8 @@ public class BannersSelectorServiceTest {
     private static final Banner BANNER_2 = new Banner(2L, new BigDecimal("30"), "comp1", new HashSet<>());
     private static final Banner BANNER_3 = new Banner(3L, new BigDecimal("40"), "comp2", new HashSet<>());
     private static final Banner BANNER_4 = new Banner(4L, new BigDecimal("40"), "comp2", new HashSet<>());
-    private static final Banner BANNER_5 = new Banner(4L, new BigDecimal("30"), "comp2", new HashSet<>());
+    private static final Banner BANNER_5 = new Banner(5L, new BigDecimal("30"), "comp2", new HashSet<>());
+    private static final Banner BANNER_6 = new Banner(6L, new BigDecimal("40"), "comp2", new HashSet<>(), true);
 
     private final BannersSelectorService bannersSelectorService = new BannersSelectorService();
 
@@ -46,7 +47,8 @@ public class BannersSelectorServiceTest {
                 Arguments.of(Arrays.asList(BANNER_1, BANNER_2), 0, emptyList(), emptyList(), 0),
                 Arguments.of(Arrays.asList(BANNER_1, BANNER_2, BANNER_3), 2, List.of(BANNER_2, BANNER_3), emptyList(), 2),
                 Arguments.of(Arrays.asList(BANNER_1, BANNER_2, BANNER_3, BANNER_4), 2, List.of(BANNER_2), List.of(BANNER_4, BANNER_3), 2),
-                Arguments.of(Arrays.asList(BANNER_3, BANNER_4, BANNER_5), 2, emptyList(), List.of(BANNER_4, BANNER_3), 1)
+                Arguments.of(Arrays.asList(BANNER_3, BANNER_4, BANNER_5), 2, emptyList(), List.of(BANNER_4, BANNER_3), 1),
+                Arguments.of(Arrays.asList(BANNER_3, BANNER_4, BANNER_5, BANNER_6), 2, List.of(BANNER_6), emptyList(), 1)
         );
     }
 }
